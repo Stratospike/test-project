@@ -14,10 +14,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                script {
-                    println(scm.branches[0])
-                }
-                exampleFun("myApp", "myRepo", "1234567890")
+                ecsDeploy(applicationName: "myApp", version: "1234567890")
             }
         }
     }
