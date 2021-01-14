@@ -1,9 +1,23 @@
+@Library('test-library@dev') _
+
 pipeline {
     agent { label 'master' }
+
+    environment {
+        CRON_APP              = false
+        AWS_ACCESS_KEY_ID     = "ak"
+        AWS_SECRET_ACCESS_KEY = "sak"
+        PROD_AWS_ACCESS_KEY_ID= "pak"
+        PROD_AWS_SECRET_ACCESS_KEY = "psak"
+    }
+
     stages {
         stage('build') {
             steps {
-                exampleFun('dave')
+                script {
+                    println(scm.branches[0])
+                }
+                exampleFun("myApp", "myRepo", "1234567890")
             }
         }
     }
